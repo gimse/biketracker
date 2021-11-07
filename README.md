@@ -12,7 +12,7 @@ Used to track bikes in Oslo
     - ``docker run -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=<you_db_password> -d -p 5984:5984 couchdb:3.2.0``
     test: ``curl http://localhost:5984`` or ``http://localhost:5984/_utils``
 - Copy and rename [.env_example](.env_example) to [.env](.env) and insert the COUCHDB_PASSWORD.
-
+- ``node get_bike_locations.js``
 ## Used packages
 - ``npm install --save axios@0.24.0``
 
