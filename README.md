@@ -8,9 +8,8 @@ Used to track bikes in Oslo
 - Install Nodejs
 - ``npm install``
 - Install Docker
-- Start a CoachDb instanse
-    - ``docker run -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=<you_db_password> -d -p 5984:5984 couchdb:3.2.0``
-    test: ``curl http://localhost:5984`` or ``http://localhost:5984/_utils``
+- Start a CoachDb instanse: ``docker run -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=<you_db_password> -d -p 5984:5984 couchdb:3.2.0``
+- Test CoachDb: [http://localhost:5984/_utils](http://localhost:5984/_utils)
 - Copy and rename [.env_example](.env_example) to [.env](.env) and insert the COUCHDB_PASSWORD.
 - ``node get_bike_locations.js``
 ## Used packages
