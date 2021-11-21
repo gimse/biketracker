@@ -7,7 +7,7 @@ logging.basicConfig({level: 'DEBUG' });
 logging.info('Starting bike locations download script')
 
 //Connecting to caochDb
-const nano = require('nano')(`http://admin:${process.env.COUCHDB_PASSWORD}@localhost:5984`);
+const nano = require('nano')(process.env.COUCHDB_URL_AND_PASSWORD);
 
 db_name='bike_locations'
 
@@ -65,21 +65,21 @@ main= async () => {
         logging.error(`Failed to get bike locations: `+error);
         return
     };
-
-
-    console.log(response.data.data);
     if(response.data.data.vehicles){
         logging.info(`Resived info on ${response.data.data.vehicles.length} vehicles.`)
     }
     else{logging.error(`Missing vehicles list`)}
 
     response.data.data.vehicles.forEach(vehicle=>{
+
+        vehicle.datetime=new Date().toISOString()
+
         db = nano.use(db_name);
         try{
             db.insert(vehicle)
         }
         catch(e){
-            logging.error('pload for doc failed:'+e)
+            logging.error(`Upload to db for vehicle with id ${vehicle.id} failed:`+e)
         }
     });
 
