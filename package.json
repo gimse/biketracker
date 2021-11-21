@@ -2,17 +2,41 @@
   "name": "biketracker",
   "version": "1.0.0",
   "description": "Used to track bikes in Oslo",
-  "main": "index.js",
+  "main": "get_bike_locations.js",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "axios-cookiejar-support": "^1.0.1",
+    "call-bind": "^1.0.2",
+    "dotenv": "^10.0.0",
+    "function-bind": "^1.1.1",
+    "get-intrinsic": "^1.1.1",
+    "has": "^1.0.3",
+    "has-symbols": "^1.0.2",
+    "is-redirect": "^1.0.0",
+    "nano": "^9.0.5",
+    "object-inspect": "^1.11.0",
+    "pify": "^5.0.0",
+    "psl": "^1.8.0",
+    "punycode": "^2.1.1",
+    "py-logging": "^2.5.1",
+    "qs": "^6.10.1",
+    "side-channel": "^1.0.4",
+    "tough-cookie": "^4.0.0",
+    "universalify": "^0.1.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node get_bike_locations.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gimse/biketracker.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "axios": "^0.24.0",
-    "dotenv": "^10.0.0",
-    "nano": "^9.0.5",
-    "py-logging": "^2.5.1"
-  }
+  "bugs": {
+    "url": "https://github.com/gimse/biketracker/issues"
+  },
+  "homepage": "https://github.com/gimse/biketracker#readme"
 }

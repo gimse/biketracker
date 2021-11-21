@@ -4,7 +4,7 @@ Used to track bikes in Oslo
 # Online Apis
 - [api.entur.io](api.entur.io)
 
-## Setup
+## Setup (Local)
 - Install Nodejs
 - ``npm install``
 - Install Docker
@@ -20,3 +20,10 @@ Used to track bikes in Oslo
 - ``npm install --save dotenv@10.0.0``
 
 - ``npm install --save py-logging@2.5.1``
+
+## Setup (Docker)
+- Install [Docker](https://www.docker.com)
+- Copy and rename [.env_example](.env_example) to [.env](.env) and insert the COUCHDB_PASSWORD.
+- ``docker build -t bike-tracker . && docker run --name bike-tracker -it --rm --env-file .env bike-tracker```
+- nb: It will fail to connect to the db.
+
