@@ -1,0 +1,95 @@
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: coachdb-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+
+apiVersion: v1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: couchdb
+  labels:
+    app: couchdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: couchdb
+  template:
+    metadata:
+      labels:
+        app: couchdb
+    spec:
+      containers:
+      - name: couchdb
+        image: couchdb:3.2.0
+        volumeMounts:
+        - name: database-storage
+          mountPath: /opt/couchdb/data
+        ports:
+        - name: couchdb
+          containerPort: 5984
+        env:
+        - name: COUCHDB_USER
+          valueFrom:
+            secretKeyRef:
+              name: coachdb-admin
+              key: username
+        - name: COUCHDB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: coachdb-admin
+              key: password
+      volumes:
+      - name: database-storage
+        persistentVolumeClaim:
+          claimName: coachdb-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: coachdb-service
+spec:
+  selector:
+    app: couchdb
+  ports:
+    - protocol: TCP
+      port: 5984
+      targetPort: 5984
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: biketracker
+  labels:
+    app: biketracker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: biketracker
+  template:
+    metadata:
+      labels:
+        app: biketracker
+    spec:
+      containers:
+      - name: biketracker
+        image: ghcr.io/gimse/biketracker:1.0.0
+      imagePullSecrets:
+      - name: regsecret

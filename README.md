@@ -27,3 +27,11 @@ Used to track bikes in Oslo
 - Copy and rename [.env_example](.env_example) to [.env](.env) and insert the COUCHDB_PASSWORD.
 - ``docker build -t bike-tracker . && docker run --name bike-tracker -it --rm --env-file .env bike-tracker```
 - nb: It will fail to connect to the db.
+
+## Kubernetes
+- Create namespace ``kubectl create namespace biketracker``
+- Set active namespace ``kubectl config set-context --current --namespace=biketracker``
+- Add iamge pull secret (if needed): ``kubectl create secret docker-registry regsecret --docker-server=ghcr.io/gimse --docker-username=${kube} --docker-password=${PW_STRING} --docker-email=${my@email.com} ``
+
+- ``kubectl apply -f kubernetes_deployment.yaml``
+- Check that the database is up at [http://192.168.1.91:5984/_utils/#](http://192.168.1.91:5984/_utils/#).

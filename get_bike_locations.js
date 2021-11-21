@@ -6,8 +6,22 @@ logging.basicConfig({level: 'DEBUG' });
 
 logging.info('Starting bike locations download script')
 
+
+if(!process.env.COUCHDB_USER){throw 'Environment variable COUCHDB_USER is not added'}
+if(!process.env.COUCHDB_PASSWORD){throw 'Environment variable COUCHDB_PASSWORD is not added'}
+if(!process.env.COUCHDB_URL){throw 'Environment variable COUCHDB_URL is not added'}
+
 //Connecting to caochDb
-const nano = require('nano')(process.env.COUCHDB_URL_AND_PASSWORD);
+db_full_url=null
+if(process.env.COUCHDB_URL.startsWith('https://')){
+    db_full_url=`https://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@${process.env.COUCHDB_URL.replace('https://','')}`
+}else if(process.env.COUCHDB_URL.startsWith('http://')){
+    db_full_url=`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@${process.env.COUCHDB_URL.replace('http://','')}`
+}else{
+    logging.error('The coachdb url are missing https or http')
+    throw 'The coachdb url are missing https or http'
+}
+const nano = require('nano')(db_full_url);
 
 db_name='bike_locations'
 
@@ -41,11 +55,9 @@ main= async () => {
       }
 
 
-
-
     var data = JSON.stringify({
     query: `{
-    vehicles(lat: 59.911491, lon: 10.757933, range: 50000, count: 5) {
+    vehicles(lat: 59.911491, lon: 10.757933, range: 50000, count: 100000) {
         lat
         lon
         id
