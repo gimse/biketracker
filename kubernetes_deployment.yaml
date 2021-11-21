@@ -72,24 +72,32 @@ spec:
 
 ---
 
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: CronJob
 metadata:
-  name: biketracker
-  labels:
-    app: biketracker
+  name: biketracker-job
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: biketracker
-  template:
-    metadata:
-      labels:
-        app: biketracker
+  schedule: "*/1 * * * *"
+  jobTemplate:
     spec:
-      containers:
-      - name: biketracker
-        image: ghcr.io/gimse/biketracker:1.0.0
-      imagePullSecrets:
-      - name: regsecret
+      template:
+        spec:
+          containers:
+          - name: biketracker
+            image: ghcr.io/gimse/biketracker:1.0.0
+            env:
+            - name: COUCHDB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: coachdb-admin
+                  key: username
+            - name: COUCHDB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: coachdb-admin
+                  key: password
+            - name: COUCHDB_URL
+              value: http://coachdb-service:5984
+          imagePullSecrets:
+          - name: regsecret
+          restartPolicy: OnFailure

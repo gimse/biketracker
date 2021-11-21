@@ -14,9 +14,9 @@ if(!process.env.COUCHDB_URL){throw 'Environment variable COUCHDB_URL is not adde
 //Connecting to caochDb
 db_full_url=null
 if(process.env.COUCHDB_URL.startsWith('https://')){
-    db_full_url=`https://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@${process.env.COUCHDB_URL.replace('https://','')}`
+    db_full_url=`https://${process.env.COUCHDB_USER}:${encodeURIComponent(process.env.COUCHDB_PASSWORD)}@${process.env.COUCHDB_URL.replace('https://','')}`
 }else if(process.env.COUCHDB_URL.startsWith('http://')){
-    db_full_url=`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@${process.env.COUCHDB_URL.replace('http://','')}`
+    db_full_url=`http://${process.env.COUCHDB_USER}:${encodeURIComponent(process.env.COUCHDB_PASSWORD)}@${process.env.COUCHDB_URL.replace('http://','')}`
 }else{
     logging.error('The coachdb url are missing https or http')
     throw 'The coachdb url are missing https or http'
@@ -24,7 +24,7 @@ if(process.env.COUCHDB_URL.startsWith('https://')){
 const nano = require('nano')(db_full_url);
 
 db_name='bike_locations'
-
+logging.info(`Connecting to db at ${process.env.COUCHDB_URL}`)
 // Setting up db is not there.
 main= async () => {
     try {
