@@ -64,8 +64,10 @@ metadata:
 spec:
   selector:
     app: couchdb
+  clusterIP: 10.43.207.63
   ports:
-    - protocol: TCP
+    - nodePort: 30703
+      protocol: TCP
       port: 5984
       targetPort: 5984
   type: LoadBalancer
@@ -97,7 +99,7 @@ spec:
                   name: coachdb-admin
                   key: password
             - name: COUCHDB_URL
-              value: http://coachdb-service:5984
+              value: http://192.168.1.81:30703
           imagePullSecrets:
           - name: regsecret
           restartPolicy: OnFailure
