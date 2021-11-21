@@ -21,7 +21,6 @@ if(process.env.COUCHDB_URL.startsWith('https://')){
     logging.error('The coachdb url are missing https or http')
     throw 'The coachdb url are missing https or http'
 }
-console.log(db_full_url)
 const nano = require('nano')(db_full_url);
 
 db_name='bike_locations'
