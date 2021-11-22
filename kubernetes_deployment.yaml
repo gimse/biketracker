@@ -79,7 +79,7 @@ kind: CronJob
 metadata:
   name: biketracker-job
 spec:
-  schedule: "*/1 * * * *"
+  schedule: "*/15 * * * *"
   jobTemplate:
     spec:
       template:
@@ -99,7 +99,8 @@ spec:
                   name: coachdb-admin
                   key: password
             - name: COUCHDB_URL
-              value: http://192.168.1.81:30703
+              value: http://192.168.1.91:30703
+            imagePullPolicy: Always
           imagePullSecrets:
           - name: regsecret
           restartPolicy: OnFailure
