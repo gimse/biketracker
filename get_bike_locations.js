@@ -74,7 +74,8 @@ main= async () => {
         logging.info('Bike location successfully resived')
     }
     catch(e){
-        logging.error(`Failed to get bike locations: `+error);
+        logging.error(`Failed to get bike locations: `);
+        logging.error(e)
         return
     };
     if(response.data.data.vehicles){
