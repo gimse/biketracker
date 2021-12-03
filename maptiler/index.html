@@ -14,7 +14,7 @@
     </div>
     <p><a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a></p>
     <script>
-      var map = L.map('map').setView([0, 0], 1);
+      var map = L.map('map').setView([59.93293466473719, 10.748055427414906], 13);
       L.tileLayer('http://localhost:8081/styles/basic-preview/{z}/{x}/{y}.png',{
         tileSize: 512,
         zoomOffset: -1,
@@ -22,6 +22,7 @@
         attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
         crossOrigin: true
       }).addTo(map);
+      var marker = L.marker([59.93293466473719, 10.748055427414906]).addTo(map);
     </script>
   </body>
 </html>
