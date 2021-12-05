@@ -4,6 +4,7 @@
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <style>
       #map {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
     </style>
@@ -22,7 +23,12 @@
         attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
         crossOrigin: true
       }).addTo(map);
-      var marker = L.marker([59.93293466473719, 10.748055427414906]).addTo(map);
+
+      $.getJSON( "/lastUpdatedLocations?count=3000", function( data ) {
+        data.bikes.forEach(bike => {
+          L.marker([bike.lat, bike.lon]).addTo(map);
+        });
+    });
     </script>
   </body>
 </html>

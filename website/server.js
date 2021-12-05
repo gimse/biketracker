@@ -31,7 +31,7 @@ app.get('/lastUpdatedLocations', function(req, res, next) {
 
     var config = {
     method: 'get',
-    url: `${process.env.COUCHDB_URL}/bike_locations/_design/datetime_doc/_view/datetime-index?limit=10&include_docs=true&descending=true`,
+    url: `${process.env.COUCHDB_URL}/bike_locations/_design/datetime_doc/_view/datetime-index?limit=${count}&include_docs=true&descending=true`,
     auth: {
         username: process.env.COUCHDB_USER,
         password: process.env.COUCHDB_PASSWORD
