@@ -24,12 +24,20 @@
         crossOrigin: true
       }).addTo(map);
 
-      bike_id="YVO:Vehicle:fda2ce0f-eda9-4138-b953-b38e65db945a"
+      bike_ids=[
+        "YVO:Vehicle:29c887df-6117-4e24-bcea-6a9cd3e23dce",
+        "YVO:Vehicle:fe80fcac-dad0-4949-a8ab-f30633308bf6",
+        "YTI:Vehicle:00d6d2c48c22693fc786f9d5ee2e6c08af2f76efa3d0943122d92765d7baac7a",
+        "YTI:Vehicle:8bbae545f68d92a8f26e4c0840516301ff3825c6daf49bfea24ba15f9fb1c7e7",
+        "YBO:Vehicle:252eedc3-c157-4f77-a52d-42c40e29710c",
+        "YLI:Vehicle:4YVKLGTUQYQ5H",
+        "YVO:Vehicle:8aae5f56-0b58-4324-b6ce-2ef2531a5de7",
+        "YLI:Vehicle:JRRAUKZ63FFR2",
+      ]
+      bike_id=bike_ids[Math.floor(Math.random() * bike_ids.length)]
+      
 
-
-
-
-      $.getJSON( '/getBikePath?bike_id=YVO:Vehicle:fda2ce0f-eda9-4138-b953-b38e65db945a', function( data ) {
+      $.getJSON( `/getBikePath?bike_id=${bike_id}`, function( data ) {
         pointList= data.bikes.map(bike => new L.LatLng(bike.lat, bike.lon));
         console.log(pointList)
         var firstpolyline = new L.Polyline(pointList, {
