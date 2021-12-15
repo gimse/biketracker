@@ -1,0 +1,7 @@
+pandas=0.21.0
+jupyterlab
+ipyleaflet
+python-dotenv
+requests
+branca
+geopandas
