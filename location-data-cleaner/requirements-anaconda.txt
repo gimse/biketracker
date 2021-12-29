@@ -7,3 +7,4 @@ branca
 geopandas
 contextily=1.2.0
 plotly_express=0.4.1
+osmnx=0.7.3
