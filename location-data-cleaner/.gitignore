@@ -2,3 +2,4 @@
 /.env
 /virtualenv
 /africa_data
+/cache
