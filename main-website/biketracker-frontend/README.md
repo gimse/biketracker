@@ -1,7 +1,16 @@
-# Getting Started with Create React App
+# Biketracker website frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started Locally
+- Install Nodejs
+- `npm install`
+- `npm start`
 
+## Getting Started Docker
+- Install Docker
+- `docker build -t biketracker-frontend . && docker run --rm --name biketracker-frontend -p 43955:80 biketracker-frontend`
+- Test that it works at http://localhost:43955
+- Stop with:
+    - `docker stop biketracker-frontend`
 ## Available Scripts
 
 In the project directory, you can run:
