@@ -6,3 +6,7 @@
 - Install Nodejs
 - `npm install --force`
 - `npm start`
+
+### Getting started with Docker
+- Install Docker
+- `docker build -t react-website . && docker run -rm -it --name react-website -p 43712:43712 react-website`
