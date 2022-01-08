@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: biketracker-frontend
+  labels:
+    app: biketracker-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: biketracker-frontend
+  template:
+    metadata:
+      labels:
+        app: biketracker-frontend
+    spec:
+      containers:
+      - name: biketracker-frontend
+        image: ghcr.io/gimse/main-website/biketracker-frontend:0.0.1
+        ports:
+        - name: frontend
+          containerPort: 80
+      imagePullSecrets:
+        - name: regsecret
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: biketracker-frontend-service
+spec:
+  selector:
+    app: biketracker-frontend
+  ports:
+    - protocol: TCP
+      port: 43955
+      targetPort: 80
+  type: LoadBalancer
