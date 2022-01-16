@@ -7,4 +7,5 @@ RUN npm run build
 
 FROM nginx:1.21.5
 COPY --from=builder ./build ./usr/share/nginx/html
+COPY ./nginx.conf.template /etc/nginx/templates/default.conf.template
 EXPOSE 80

@@ -9,7 +9,7 @@
 ## Getting Started Docker
 - Install Docker
 - `cp .env_example .env`
-- `docker build -t biketracker-frontend . && docker run --rm --name biketracker-frontend -p 43955:80 biketracker-frontend`
+- `docker build -t biketracker-frontend . && docker run --rm --env-file .env --name biketracker-frontend -p 43955:80 biketracker-frontend`
 - Test that it works at http://localhost:43955
 - Stop with:
     - `docker stop biketracker-frontend`
