@@ -1,12 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 import './index.css';
-import App from './App';
+import MainNavBar from './MainNavBar';
+import Map from "./Map";
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MainNavBar />
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Map />} />
+    </Routes>
+  </BrowserRouter>,
   </React.StrictMode>,
   document.getElementById('root')
 );
