@@ -14,11 +14,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 ReactDOM.render(
   <React.StrictMode>
     <MainNavBar />
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Map />} />
-    </Routes>
-  </BrowserRouter>,
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Map />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

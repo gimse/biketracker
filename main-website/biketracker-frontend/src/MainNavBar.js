@@ -28,7 +28,6 @@ export default class MainNavBar extends React.Component {
   }
   render() {
     return (
-      <div>
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">SykkelData.no</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
@@ -43,7 +42,6 @@ export default class MainNavBar extends React.Component {
             </Nav>
           </Collapse>
         </Navbar>
-      </div>
     );
   }
 }
