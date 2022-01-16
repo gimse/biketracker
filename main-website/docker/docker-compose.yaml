@@ -1,0 +1,45 @@
+# This docker-compose file can be used to bring up an example instance of oauth2-proxy
+# for manual testing and exploration of features.
+# Alongside OAuth2-Proxy, this file also starts Keycloak to act as the identity provider,
+# HTTPBin as an example upstream.
+#
+# This can either be created using docker-compose
+#    docker-compose -f docker-compose-keycloak.yaml <command>
+# Or:
+#    make keycloak-<command> (eg. make keycloak-up, make keycloak-down)
+#
+# Access http://oauth2-proxy.localtest.me:4180 to initiate a login cycle using user=admin@example.com, password=password
+# Access http://keycloak.localtest.me:9080 with the same credentials to check out the settings
+version: '3.0'
+services:
+
+  biketracker-frontend2:
+    container_name: biketracker-frontend2
+    hostname: biketracker-frontend2
+    restart: unless-stopped
+    build: ../biketracker-frontend
+    ports:
+      - "43966:80"
+    networks:
+      biketracker-frontend2: {}
+      maptiler: {}
+    depends_on:
+      - maptiler
+    environment:
+      MAPTILER_URL: "http://maptiler2:80"
+  maptiler:
+    container_name: maptiler2
+    hostname: maptiler2
+    restart: unless-stopped
+    image: maptiler/tileserver-gl
+    volumes:
+      - ../maptiler/.:/data
+    networks:
+      biketracker-frontend2: {}
+      maptiler: {}
+    ports:
+      - "43967:80"
+
+networks:
+  biketracker-frontend2: {}
+  maptiler: {}
