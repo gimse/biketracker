@@ -2,11 +2,13 @@
 
 ## Getting Started Locally
 - Install Nodejs
+- `cp .env_example .env`
 - `npm install`
 - `npm start`
 
 ## Getting Started Docker
 - Install Docker
+- `cp .env_example .env`
 - `docker build -t biketracker-frontend . && docker run --rm --name biketracker-frontend -p 43955:80 biketracker-frontend`
 - Test that it works at http://localhost:43955
 - Stop with:
