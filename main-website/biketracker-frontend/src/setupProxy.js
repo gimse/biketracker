@@ -5,14 +5,21 @@ module.exports = function(app) {
     '/styles',
     createProxyMiddleware({
       target: process.env.MAPTILER_URL,
-      changeOrigin: true,
+      changeOrigin: false,
     })
   );
   app.use(
-    '/api2',
+    '/data',
     createProxyMiddleware({
-      target: 'http://localhost:3070',
-      changeOrigin: true,
+      target: process.env.MAPTILER_URL,
+      changeOrigin: false,
+    })
+  );
+  app.use(
+    '/fonts',
+    createProxyMiddleware({
+      target: process.env.MAPTILER_URL,
+      changeOrigin: false,
     })
   );
 };

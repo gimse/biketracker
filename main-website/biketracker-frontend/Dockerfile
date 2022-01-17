@@ -1,4 +1,4 @@
-FROM node:14.18 AS builder
+FROM node:16.13.2 AS builder
 COPY package-lock.json package.json .
 RUN npm install --production
 COPY ./src ./src

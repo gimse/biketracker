@@ -11,12 +11,17 @@ server {
     }
 
     location /styles {
+      proxy_set_header Host $http_host;
       proxy_pass  ${MAPTILER_URL};
     }
-    location /test {
-      proxy_pass  https://www.nrk.no;
+    location /data {
+      proxy_set_header Host $http_host;
+      proxy_pass  ${MAPTILER_URL};
     }
-
+    location /fonts {
+      proxy_set_header Host $http_host;
+      proxy_pass  ${MAPTILER_URL};
+    }
     #error_page  404              /404.html;
 
     # redirect server error pages to the static page /50x.html

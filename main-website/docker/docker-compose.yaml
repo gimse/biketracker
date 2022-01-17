@@ -39,6 +39,7 @@ services:
       maptiler: {}
     ports:
       - "43967:80"
+      - "43968:80"
 
 networks:
   biketracker-frontend2: {}

@@ -17,6 +17,7 @@ spec:
       containers:
       - name: biketracker-frontend
         image: ghcr.io/gimse/main-website/biketracker-frontend:0.0.1
+        imagePullPolicy: Always
         ports:
         - name: frontend
           containerPort: 80
