@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: biketracker-frontend
+  labels:
+    app: biketracker-frontend
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: biketracker-frontend
+  template:
+    metadata:
+      labels:
+        app: biketracker-frontend
+    spec:
+      containers:
+      - name: biketracker-frontend
+        image: ghcr.io/gimse/main-website/biketracker-frontend:0.0.1
+        imagePullPolicy: Always
+        ports:
+        - name: frontend
+          containerPort: 80
+        env:
+        - name: MAPTILER_URL
+          value: "http://10.43.118.68:80"
+      imagePullSecrets:
+        - name: regsecret
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: biketracker-frontend-service
+spec:
+  selector:
+    app: biketracker-frontend
+  ports:
+    - protocol: TCP
+      port: 43955
+      targetPort: 80
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maptiler
+  labels:
+    app: maptiler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maptiler
+  template:
+    metadata:
+      labels:
+        app: maptiler
+    spec:
+      containers:
+      - name: maptiler
+        image: klokantech/tileserver-gl-light:v2.4.0
+        imagePullPolicy: Always
+        ports:
+        - name: endpoint
+          containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: maptiler-service
+spec:
+  selector:
+    app: maptiler
+  ports:
+    - protocol: TCP
+      port: 43955
+      targetPort: 80
+  type: LoadBalancer
