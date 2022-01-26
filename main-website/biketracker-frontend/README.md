@@ -17,3 +17,4 @@
 
 ## Deploy to Kubenestes
 - The image is build a [Github Action](https://github.com/gimse/biketracker/actions/workflows/main-website.biketracker-frontend.yaml). Check that you have access.
+- `kubectl apply -f kubenetes-deployment.yaml -n biketracker`
